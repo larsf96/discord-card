@@ -50,7 +50,7 @@ class DiscordCard extends HTMLElement {
                 --raw-listening: rgba(108,207,159,1);
                 --raw-watching: rgba(94,25,229,1);
                 /* positioning */
-                --img-size: 40px;
+                --img-size: 4em;
                 --img-column-size: 45px;
                 --text-padding: .5em;
                 --container-padding: 1em;
