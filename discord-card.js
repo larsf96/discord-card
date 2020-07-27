@@ -368,6 +368,7 @@ class DiscordCard extends HTMLElement {
 
     set hass(hass) {
         let state = hass.states[this.config.entity].state;
+        if(!state) throw new Error('Invalid entity');
         let attributes = hass.states[this.config.entity].attributes;
 
         if (state !== this.entityState || attributes !== this.entityAttributes) {
