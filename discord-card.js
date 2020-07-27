@@ -15,6 +15,7 @@ class DiscordCard extends HTMLElement {
             listening: "rgba(108,207,159,1)",
             watching: "rgba(94,25,229,1)"
         }; */
+        this.size = 1;
     }
 
     setConfig(config) {
@@ -29,7 +30,7 @@ class DiscordCard extends HTMLElement {
         if (this.config["show_game"] == undefined) this.config["show_game"] = true;
         if (this.config["show_spotify"] == undefined) this.config["show_spotify"] = true;
         if (this.config["show_streaming"] == undefined) this.config["show_streaming"] = false;
-        if (this.config["show_misc_status"] == undefined) this.config["show_misc_status"] = false;
+        if (this.config["show_misc"] == undefined) this.config["show_misc"] = false;
 
         let card = document.createElement("ha-card");
 
@@ -246,6 +247,8 @@ class DiscordCard extends HTMLElement {
         let show_rawListening = !show_spotify && this.config["show_misc"] && attributes["listening"] !== null;
         let show_rawWatching = this.config["show_misc"] && attributes["watching"] !== null;
 
+        this.size = 1 + show_game + show_streaming + show_spotify + show_rawListening + show_rawWatching;
+        
         // Userinfo
         this.shadowRoot.getElementById("name").textContent = attributes["friendly_name"];
         this.shadowRoot.getElementById("avatar").src = attributes["entity_picture"];
@@ -379,7 +382,7 @@ class DiscordCard extends HTMLElement {
     }
 
     getCardSize() {
-        return 1;
+        return this.size;
     }
 }
 
