@@ -51,7 +51,7 @@ class DiscordCard extends HTMLElement {
                 --raw-watching: rgba(94,25,229,1);
                 /* positioning */
                 --img-size: 4em;
-                --img-column-size: 45px;
+                --img-column-size: 4.5em;
                 --text-padding: .5em;
                 --container-padding: 1em;
             }
@@ -131,13 +131,13 @@ class DiscordCard extends HTMLElement {
                 grid template-rows: 40% 30% 30%;
                 align-content: center;
                 background: var(--spotify);
-                padding: var(--container-padding);
             }
             #spotifyCover {
                 grid-row: 1 / span 3;
                 width: var(--img-size);
                 border-radius: 3px;
                 margin: auto 0;
+                display: block;
             }
             #spotifyTitle, #spotifyArtist, #spotifyAlbum, #spotifyTitle:link, #spotifyTitle:visited, #spotifyTitle:hover, #spotifyTitle:active {
                 color: #000;
