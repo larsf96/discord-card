@@ -25,4 +25,4 @@ resources:
 | show_game          | Boolean | false    | *true*  | Show what game a user is playing                                     |
 | show_streaming     | Boolean | false    | *true*  | Show info and link when a user is streaming                          |
 | show_spotify       | Boolean | false    | *true*  | Show song info when a user is listening to Spotify                   |
-| show_misc          | Boolean | false    | *true*  | Show misc activities ("Listening" and "Watching") with info and link |
+| show_misc          | Boolean | false    | *false* | Show misc activities ("Listening" and "Watching") with info and link |
