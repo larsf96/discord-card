@@ -29,7 +29,7 @@ class DiscordCard extends HTMLElement {
         if (this.config["show_custom_status"] == undefined) this.config["show_custom_status"] = true;
         if (this.config["show_game"] == undefined) this.config["show_game"] = true;
         if (this.config["show_spotify"] == undefined) this.config["show_spotify"] = true;
-        if (this.config["show_streaming"] == undefined) this.config["show_streaming"] = false;
+        if (this.config["show_streaming"] == undefined) this.config["show_streaming"] = true;
         if (this.config["show_misc"] == undefined) this.config["show_misc"] = false;
 
         let card = document.createElement("ha-card");
@@ -116,12 +116,12 @@ class DiscordCard extends HTMLElement {
 
             /* Streaming */
             #streaming {
-                display: grid;
-                grid-template-rows: 50% auto;
-                align-content: center;
                 background: var(--streaming);
             }
-            #streamingDesc {
+            #streamingLink:link, #streamingLink:visited, #streamingLink:hover, #streamingLink:active {
+                color: #fff;
+                text-decoration: none;
+                margin: auto 0;
                 font-style: italic;
             }
 
@@ -156,15 +156,16 @@ class DiscordCard extends HTMLElement {
             /* Misc */
             /* Listening */
             #misc_listening {
-                display: grid;
-                grid-template-rows: 50% auto;
-                align-content: center;
                 background: var(--raw-listening);
             }
+            #rawListeningLink:link, #rawListeningLink:visited, #rawListeningLink:hover, #rawListeningLink:active,
+            #rawWatchingLink:link, #rawWatchingLink:visited, #rawWatchingLink:hover, #rawWatchingLink:active {
+                color: #000;
+                text-decoration: none;
+                margin: auto 0;
+                font-style: italic;
+            }
             #misc_watching {
-                display: grid;
-                grid-template-rows: 50% auto;
-                align-content: center;
                 background: var(--raw-watching);
             }
         `;
@@ -192,9 +193,9 @@ class DiscordCard extends HTMLElement {
         // Streaming
         let stream = document.createElement("div");
         stream.classList.add("container");
-        game.classList.add("text-container");
+        stream.classList.add("text-container");
+        stream.appendChild(document.createElement("span")).id = "streamingInfo"
         stream.appendChild(document.createElement("a")).id = "streamingLink";
-        stream.appendChild(document.createElement("span")).id = "streamingDesc";
         card.appendChild(stream).id = "streaming";
 
         //Spotify
@@ -216,16 +217,16 @@ class DiscordCard extends HTMLElement {
         let rawListening = document.createElement("div")
         rawListening.classList.add("container");
         rawListening.classList.add("text-container");
+        stream.appendChild(document.createElement("span")).id = "rawListeningInfo";
         rawListening.appendChild(document.createElement("a")).id = "rawListeningLink";
-        rawListening.appendChild(document.createElement("span")).id = "rawWatchingDesc";
         card.appendChild(rawListening).id = "rawListening";
         // Misc: Watching
         let rawWatching = document.createElement("div")
         rawWatching.classList.add("container");
         rawWatching.classList.add("text-container");
         rawWatching.classList.add("last_element");
+        stream.appendChild(document.createElement("span")).id = "rawWatchingInfo";
         rawWatching.appendChild(document.createElement("a")).id = "rawWatchingLink";
-        rawWatching.appendChild(document.createElement("span")).id = "rawWatchingDesc";
         card.appendChild(rawWatching).id = "rawWatching";
     }
 
@@ -307,11 +308,12 @@ class DiscordCard extends HTMLElement {
         // Streaming
         let element_streaming = this.shadowRoot.getElementById("streaming");
         if(show_streaming) {
+            let info = this.shadowRoot.getElementById("streamingInfo");
             let link = this.shadowRoot.getElementById("streamingLink");
-            link.src = attributes["streaming_url"];
-            link.textContent = (language === "de") ? "streamt " + attributes["streaming"] : "is streaming " + attributes["streaming"];
-            this.shadowRoot.getElementById("streamingDesc").innerText = attributes["streaming_details"];
-            element_streaming.style.display = "grid";
+            info.textContent = (language === "de") ? "streamt " : "is streaming ";
+            link.setAttribute("href", attributes["streaming_url"]);
+            link.textContent = attributes["streaming"];
+            element_streaming.style.display = "block";
             if(!(show_spotify || show_rawListening || show_rawWatching)) {
                 element_streaming.classList.add("last_element");
             } else {
@@ -342,11 +344,12 @@ class DiscordCard extends HTMLElement {
         // RawListening
         let element_rawListeing = this.shadowRoot.getElementById("rawListening");
         if(show_rawListening){
+            let info = this.shadowRoot.getElementById("rawListeningInfo");
             let link = this.shadowRoot.getElementById("rawListeningLink");
-            link.src = attributes["listening_url"];
-            link.textContent = (language === "de") ? "hört " + attributes["listening"] : "is listening to " + attributes["listening"];
-            this.shadowRoot.getElementById("rawListeningDesc").innerText = attributes["listening_details"];
-            element_rawListeing.style.display = "grid";
+            info.textContent = (language === "de") ? "hört " : "is listening to ";
+            link.setAttribute("href", attributes["listening_url"]);
+            link.textContent = attributes["listening"];
+            element_rawListeing.style.display = "block";
             if(!show_rawWatching) {
                 element_rawListeing.classList.add("last_element");
             } else {
@@ -359,11 +362,12 @@ class DiscordCard extends HTMLElement {
         // RawWatching
         let element_rawWatching = this.shadowRoot.getElementById("rawWatching");
         if(show_rawWatching){
+            let info = this.shadowRoot.getElementById("rawWatchingInfo");
             let link = this.shadowRoot.getElementById("rawWatchingLink");
-            link.src = attributes["watching_url"];
-            link.textContent = (language === "de") ? "hört " + attributes["watching"] : "is watching " + attributes["watching"];
-            this.shadowRoot.getElementById("rawWatchingDesc").innerText = attributes["watching_details"];
-            element_rawWatching.style.display = "grid";
+            info.textContent = (language === "de") ? "schaut " : "is watching ";
+            link.setAttribute("href", attributes["watching_url"]);
+            link.textContent = attributes["watching"];
+            element_rawWatching.style.display = "block";
         } else {
             element_rawWatching.style.display = "none";
         }
