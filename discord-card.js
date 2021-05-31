@@ -22,9 +22,9 @@ class DiscordCard extends HTMLElement {
         if (this.shadowRoot.lastChild) { this.shadowRoot.removeChild(this.shadowRoot.lastChild); }
         this.config = Object.assign({}, config);
 
-        if(!String(this.config["entity"]).match(/^sensor\.discord_.*_[0-9]{4}/)){
-            throw new Error('Invalid entity');
-        }
+        //if(!String(this.config["entity"]).match(/^sensor\.discord_.*_[0-9]{4}/)){
+        //    throw new Error('Invalid entity');
+        //}
 
         if (this.config["show_custom_status"] == undefined) this.config["show_custom_status"] = true;
         if (this.config["show_game"] == undefined) this.config["show_game"] = true;
