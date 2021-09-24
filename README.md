@@ -1,3 +1,5 @@
+# This repository is out of date and will not work. You can fork it and update it yourself or wait if I ever have the time to update it. 
+
 # discord-card
 A Lovelace card for the HomeAssistant [Discord Game](https://github.com/LordBoos/discord_game) integration.  
 **If you want to use this you have to use [my fork](https://github.com/C0ntroller/discord_game) so custom emotes work!**
