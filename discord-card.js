@@ -252,7 +252,7 @@ class DiscordCard extends HTMLElement {
         
         // Userinfo
         this.shadowRoot.getElementById("name").textContent = attributes["friendly_name"];
-        if(attributes["entity_picture"] != null && !attributes["entity_picture"].toString().contains("webp")) {
+        if(attributes["entity_picture"] != null && !attributes["entity_picture"].toString().includes("webp")) {
             this.shadowRoot.getElementById("avatar").src = attributes["entity_picture"];
         } else {
             this.shadowRoot.getElementById("avatar").src = attributes["entity_picture"].toString().replace("webp", "png");
