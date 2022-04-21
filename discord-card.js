@@ -252,7 +252,11 @@ class DiscordCard extends HTMLElement {
         
         // Userinfo
         this.shadowRoot.getElementById("name").textContent = attributes["friendly_name"];
-        this.shadowRoot.getElementById("avatar").src = attributes["entity_picture"];
+        if(!attributes["entity_picture"].contains("webp")) {
+            this.shadowRoot.getElementById("avatar").src = attributes["entity_picture"];
+        } else {
+            this.shadowRoot.getElementById("avatar").src = attributes["entity_picture"].replace("webp", "png");
+        }
 
         // Status
         // - Emoji/Dot
